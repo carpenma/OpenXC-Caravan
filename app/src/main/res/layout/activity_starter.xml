@@ -19,5 +19,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
         android:id="@+id/vehicle_speed" />
-    
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/other_data"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/vehicle_speed"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

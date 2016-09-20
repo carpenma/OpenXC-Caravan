@@ -1,4 +1,4 @@
-package com.openxc.openxcstarter;
+package com.openxc.openxccaravan;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -11,7 +11,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
-import com.openxcplatform.openxcstarter.R;
+import com.openxc.BinaryMessages;
+import com.openxc.messages.SimpleVehicleMessage;
+import com.openxc.messages.VehicleMessage;
+import com.openxcplatform.openxccaravan.R;
 import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.EngineSpeed;
@@ -21,6 +24,7 @@ public class StarterActivity extends Activity {
 
     private VehicleManager mVehicleManager;
     private TextView mEngineSpeedView;
+    private TextView mOtherDataView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,7 @@ public class StarterActivity extends Activity {
         // grab a reference to the engine speed text object in the UI, so we can
         // manipulate its value later from Java code
         mEngineSpeedView = (TextView) findViewById(R.id.vehicle_speed);
+        mOtherDataView = (TextView) findViewById(R.id.other_data);
     }
 
     @Override
@@ -42,6 +47,7 @@ public class StarterActivity extends Activity {
             // fashion.
             mVehicleManager.removeListener(EngineSpeed.class,
                     mSpeedListener);
+            mVehicleManager.removeListener(VehicleMessage.class, mListener);
             unbindService(mConnection);
             mVehicleManager = null;
         }
@@ -85,6 +91,20 @@ public class StarterActivity extends Activity {
         }
     };
 
+    private VehicleMessage.Listener mListener = new VehicleMessage.Listener() {
+        @Override
+        public void receive(final VehicleMessage message) {
+            StarterActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (message.asNamedMessage().getName().equals("caravan_msg")) {
+                        mOtherDataView.setText("Data: " + message);
+                    }
+                }
+            });
+        }
+    };
+
     private ServiceConnection mConnection = new ServiceConnection() {
         // Called when the connection with the VehicleManager service is
         // established, i.e. bound.
@@ -102,6 +122,10 @@ public class StarterActivity extends Activity {
             // we request that the VehicleManager call its receive() method
             // whenever the EngineSpeed changes
             mVehicleManager.addListener(EngineSpeed.class, mSpeedListener);
+
+            // Elsewhere in your activity, register this listener to receive all CAN
+            // messages from the VI
+            mVehicleManager.addListener(SimpleVehicleMessage.class, mListener);
         }
 
         // Called when the connection with the service disconnects unexpectedly

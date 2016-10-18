@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="https://schemas.android.com/apk/res/android"
+    xmlns:tools="https://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_new__existing__caravan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.openxc.openxccaravan.New_Existing_Caravan">
+
+
+    <TextView
+        android:text="@string/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/welcome_text"
+        android:textStyle="normal|bold"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="@string/or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/new_button"
+        android:id="@+id/or_text"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/existing_button"
+        android:textAlignment="center"
+        android:gravity="center" />
+
+    <Button
+        android:text="@string/new_caravan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_below="@+id/welcome_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="157dp"
+        android:onClick="NewCaravan" />
+
+    <Button
+        android:text="@string/existing_caravan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/existing_button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/new_button"
+        android:layout_alignEnd="@+id/new_button"
+        android:layout_marginBottom="105dp"
+        android:onClick="ExistingCaravan" />
+
+</RelativeLayout>

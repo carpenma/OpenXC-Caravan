@@ -1,1 +1,4 @@
 include ':app'
+include ':library'
+
+project(':library').projectDir = new File(settingsDir, '../OpenXC_Android_Modified/library')

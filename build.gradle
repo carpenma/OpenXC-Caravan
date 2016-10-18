@@ -4,12 +4,56 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
+        classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+    }
+}
+
+ext {
+    compileSdkVersion = 22
+    buildToolsVersion = "24.0.2"
+    minSdkVersion = 10
+    targetSdkVersion = 22
+
+    versionMajor = 0
+    versionMinor = 0
+    versionPatch = 1
+
+    versionCode = versionMajor * 1000000 + versionMinor * 1000 + versionPatch
+    versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+
+    bintrayUser = getValue(properties, "BINTRAY_USER")
+    bintrayPassword = getValue(properties, "BINTRAY_API_KEY")
+
+    def Properties properties = new Properties()
+    if(file('local.properties').exists())
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    keystorePassword = getValue(properties, "KEYSTORE_PASS")
+    keyAlias = getValue(properties, "ALIAS_NAME")
+    keyPassword = getValue(properties, "ALIAS_PASS")
+
+    bugsnagToken = getValue(properties, "BUGSNAG_TOKEN")
+    serviceAccountEmail = getValue(properties, "SERVICE_EMAIL")
+
+    bintrayUser = getValue(properties, "BINTRAY_USER")
+    bintrayPassword = getValue(properties, "BINTRAY_API_KEY")
+}
+
+def getValue(def props, def name) {
+    if (props && props[name])
+        return props[name]
+    else if (System.getenv(name))
+        return System.getenv(name)
+    else {
+        logger.log(LogLevel.ERROR, name + " has not been provided, add it to your local.properties file")
+        return "DEFAULT"
     }
 }

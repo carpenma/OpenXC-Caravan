@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 import com.openxc.BinaryMessages;
@@ -18,6 +19,9 @@ import com.openxcplatform.openxccaravan.R;
 import com.openxc.VehicleManager;
 import com.openxc.measurements.Measurement;
 import com.openxc.measurements.EngineSpeed;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class StarterActivity extends Activity {
     private static final String TAG = "StarterActivity";
@@ -98,7 +102,7 @@ public class StarterActivity extends Activity {
                 @Override
                 public void run() {
                     if (message.asNamedMessage().getName().equals("caravan_msg")) {
-                        mOtherDataView.setText("Data: " + message);
+                        mOtherDataView.setText("Value: " + message.asSimpleMessage().getValue());
                     }
                 }
             });
@@ -130,7 +134,7 @@ public class StarterActivity extends Activity {
 
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName className) {
-            Log.w(TAG, "VehicleManager Service  disconnected unexpectedly");
+            Log.w(TAG, "VehicleManager Service disconnected unexpectedly");
             mVehicleManager = null;
         }
     };
@@ -140,5 +144,31 @@ public class StarterActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.starter, menu);
         return true;
+    }
+
+    public void sendMemberData(View view) {
+        Map test_data = new HashMap();
+        test_data.put("role", "HOST");
+        test_data.put("year", "2017");
+        test_data.put("make", "Ford");
+        test_data.put("model", "GT");
+        test_data.put("num_pass", "2");
+        test_data.put("pretty", "MyGT");
+        //mVehicleManager.send(new VehicleMessage(test_data));
+        SimpleVehicleMessage newMessage = new SimpleVehicleMessage(new Long(0), "caravan_message", "veh_setup", test_data);
+        Log.v(TAG, newMessage.toString());
+        mVehicleManager.send(newMessage);
+    }
+
+    public void sendHostData(View view) {
+        Map test_data = new HashMap();
+        test_data.put("protected", "True");
+        test_data.put("pw", "xplained");
+        test_data.put("max", "3");
+        test_data.put("pretty", "RoadTrip");
+        //mVehicleManager.send(new VehicleMessage(test_data));
+        SimpleVehicleMessage newMessage = new SimpleVehicleMessage(new Long(0), "caravan_message", "start_caravan", test_data);
+        Log.v(TAG, newMessage.toString());
+        mVehicleManager.send(newMessage);
     }
 }

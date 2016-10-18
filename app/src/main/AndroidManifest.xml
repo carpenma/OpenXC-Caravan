@@ -2,20 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.openxcplatform.openxccaravan"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="18" />
 
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.openxc.openxccaravan.StarterActivity"
-            android:label="@string/app_name" >
+            android:label="OpenXC Test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +27,18 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.openxc.VehicleManager"/>
+        <service android:name="com.openxc.VehicleManager" />
+
+        <!--
+        <activity android:name="com.openxc.openxccaravan.New_Existing_Caravan"
+             android:label="OpenXC Caravan Demo">
+           - <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+        </activity>
+        -->
+        <activity android:name="com.openxc.openxccaravan.VehicleDetails"></activity>
     </application>
 
 </manifest>

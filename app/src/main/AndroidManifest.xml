@@ -17,28 +17,18 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity
-            android:name="com.openxc.openxccaravan.StarterActivity"
+        <service android:name="com.openxc.VehicleManager" />
+        <activity android:name="com.openxc.openxccaravan.StarterActivity" />
+        <activity android:name="com.openxc.openxccaravan.VehicleDetails"
             android:label="OpenXC Test">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name="com.openxc.VehicleManager" />
-
-        <!--
-        <activity android:name="com.openxc.openxccaravan.New_Existing_Caravan"
-             android:label="OpenXC Caravan Demo">
-           - <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-        </activity>
-        -->
-        <activity android:name="com.openxc.openxccaravan.VehicleDetails"></activity>
+        <activity android:name="com.openxc.openxccaravan.CaravanType" />
+        <activity android:name="com.openxc.openxccaravan.CaravanCreate" />
+        <activity android:name="com.openxc.openxccaravan.AvailableCaravans" />
     </application>
 
 </manifest>

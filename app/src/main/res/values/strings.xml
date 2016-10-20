@@ -12,5 +12,7 @@
     <string name="send_member_message">Send Member Message</string>
     <string name="save">Save</string>
     <string name="vehicle_name">Vehicle Name</string>
+    <string name="host_button_text">Host</string>
+    <string name="member_button_text">Member</string>
 
 </resources>

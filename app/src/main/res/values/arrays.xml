@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="makes">
+        <item>Ford</item>
+        <item>Lincoln</item>
+    </string-array>
+    <string-array name="models_ford">
+        <item>Focus</item>
+        <item>Fusion</item>
+        <item>Edge</item>
+        <item>Escape</item>
+        <item>F-150</item>
+        <item>Taurus</item>
+    </string-array>
+    <string-array name="models_lincoln">
+        <item>MKC</item>
+        <item>MKX</item>
+        <item>MKZ</item>
+        <item>Continental</item>
+        <item>Navigator</item>
+    </string-array>
+</resources>

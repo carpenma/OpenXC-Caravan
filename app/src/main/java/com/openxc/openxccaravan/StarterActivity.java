@@ -112,8 +112,7 @@ public class StarterActivity extends Activity {
     private ServiceConnection mConnection = new ServiceConnection() {
         // Called when the connection with the VehicleManager service is
         // established, i.e. bound.
-        public void onServiceConnected(ComponentName className,
-                IBinder service) {
+        public void onServiceConnected(ComponentName className, IBinder service) {
             Log.i(TAG, "Bound to VehicleManager");
             // When the VehicleManager starts up, we store a reference to it
             // here in "mVehicleManager" so we can call functions on it
@@ -148,7 +147,6 @@ public class StarterActivity extends Activity {
 
     public void sendMemberData(View view) {
         Map test_data = new HashMap();
-        test_data.put("role", "HOST");
         test_data.put("year", "2017");
         test_data.put("make", "Ford");
         test_data.put("model", "GT");

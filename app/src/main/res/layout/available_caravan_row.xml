@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:text="Caravan Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/PrettyName"
+        android:layout_weight="1"
+        android:textSize="24sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="LOCK | cur/max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Details"
+        android:layout_weight="1"
+        android:textSize="18sp"
+        android:textStyle="normal|italic" />
+</LinearLayout>

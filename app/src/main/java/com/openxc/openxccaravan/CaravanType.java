@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.openxc.VehicleManager;
 import com.openxc.messages.SimpleVehicleMessage;
+import com.openxc.messages.VehicleMessage;
 import com.openxcplatform.openxccaravan.R;
 
 import java.util.HashMap;
@@ -29,6 +30,25 @@ public class CaravanType extends Activity {
         Intent vehManager = new Intent(this, VehicleManager.class);
         bindService(vehManager, mConnection, Context.BIND_AUTO_CREATE);
 
+    }
+
+    public void onPause() {
+        super.onPause();
+
+        if(mVehicleManager != null) {
+            Log.i(TAG, "Unbinding from Vehicle Manager");
+            unbindService(mConnection);
+            mVehicleManager = null;
+        }
+    }
+
+    public void onResume() {
+        super.onResume();
+
+        if(mVehicleManager == null) {
+            Intent intent = new Intent(this, VehicleManager.class);
+            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        }
     }
 
     VehicleManager mVehicleManager;

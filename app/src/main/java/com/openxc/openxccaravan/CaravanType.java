@@ -60,6 +60,7 @@ public class CaravanType extends Activity {
 
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName className) {
+            Log.w(TAG, "VehicleManager Service disconnected");
             mVehicleManager = null;
         }
     };

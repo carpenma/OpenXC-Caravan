@@ -2,13 +2,14 @@ package com.openxc.openxccaravan;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.openxc.openxccaravan.Available;
 import com.openxcplatform.openxccaravan.R;
 
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ import java.util.ArrayList;
 
 public class AvailableAdapter extends ArrayAdapter<Available>{
     private final Context context;
+    private static final String TAG = "AvailableAdapter";
     private final int layoutResourceId;
     private final ArrayList<Available> available_list;
+    private int select_idx;
 
     public AvailableAdapter(Context context, int layoutResourceId, ArrayList<Available> available_list) {
         super(context, layoutResourceId);
@@ -29,8 +32,23 @@ public class AvailableAdapter extends ArrayAdapter<Available>{
         this.context = context;
     }
 
+    public void setSelectedIdx(int idx) {
+        select_idx = idx;
+        notifyDataSetChanged();
+    }
+
     @Override
-    public View getView(int pos, View convertView, ViewGroup parent) {
+    public int getCount() {
+        super.getCount();
+        return available_list.size();
+    }
+
+    public int getSelectedIdx() {
+        return select_idx;
+    }
+
+    @Override
+    public @NonNull View getView(int pos, View convertView, @NonNull ViewGroup parent) {
         View row = convertView;
         ViewHolder holder = null;
 

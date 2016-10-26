@@ -81,6 +81,7 @@ public class CaravanCreate extends Activity {
 
         // Called when the connection with the service disconnects unexpectedly
         public void onServiceDisconnected(ComponentName className) {
+            Log.w(TAG, "VehicleManager Service disconnected");
             mVehicleManager = null;
         }
     };
@@ -107,7 +108,7 @@ public class CaravanCreate extends Activity {
 
         } else {
             if (password.getText().toString().equals(password_repeat.getText().toString())) {
-                // Max must not be a number
+                // Max isn't a number
             }
             else {
                 // Password entries don't match

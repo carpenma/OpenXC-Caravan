@@ -10,4 +10,11 @@ public class Available {
     public int max;
     public boolean locked;
 
+    public Available(String pretty, int count, int max, boolean locked) {
+        this.pretty_name = pretty;
+        this.count = count;
+        this.max = max;
+        this.locked = locked;
+    }
+
 }

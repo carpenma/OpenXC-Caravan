@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.openxc.VehicleManager;
 import com.openxc.messages.SimpleVehicleMessage;
@@ -86,6 +87,12 @@ public class CaravanCreate extends Activity {
         }
     };
 
+    public void MakeToast (String text, int duration) {
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context,text,duration);
+        toast.show();
+    }
+
     public void StartCaravan(View view) {
         final EditText name = (EditText) findViewById(R.id.caravan_name);
         CompoundButton passwordSwitch = (CompoundButton) findViewById(R.id.pw_protected);
@@ -105,14 +112,12 @@ public class CaravanCreate extends Activity {
             Log.v(TAG, newMessage.toString());
             mVehicleManager.send(newMessage);
             // Change the view
+            Intent HostWaiting = new Intent(this, HostWaiting.class);
+            startActivity(HostWaiting);
 
         } else {
-            if (password.getText().toString().equals(password_repeat.getText().toString())) {
-                // Max isn't a number
-            }
-            else {
-                // Password entries don't match
-            }
+            if (password.getText().toString().equals(password_repeat.getText().toString())) { MakeToast("Max must be a number! (1-99 inclusive)",3); }
+            else { MakeToast("Password and retype password do not match!",3); }
         }
     }
 }

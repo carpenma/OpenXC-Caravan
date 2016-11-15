@@ -13,12 +13,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.openxc.VehicleManager;
 import com.openxc.messages.SimpleVehicleMessage;
 import com.openxc.messages.VehicleMessage;
 import com.openxcplatform.openxccaravan.R;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -105,24 +107,45 @@ public class VehicleDetails extends Activity {
         }
     };
 
+    public void MakeToast (String text, int duration) {
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context,text,duration);
+        toast.show();
+    }
+
     public void SaveVehicle(View view){
         // Probably do some kind of simple validation?
         EditText VehName = (EditText)findViewById(R.id.vehicle_name);
-        //EditText VehYear = (EditText)findViewById(R.id.vehicle_year);
+        EditText VehYear = (EditText)findViewById(R.id.vehicle_year);
+        EditText NumPass = (EditText)findViewById(R.id.num_passengers);
         Spinner VehMake = (Spinner) findViewById(R.id.vehicle_make);
         Spinner VehModel = (Spinner) findViewById(R.id.vehicle_model);
-        Map vehicle_data = new HashMap();
-        vehicle_data.put("pretty", VehName.getText().toString());
-        vehicle_data.put("year", "0000");
-        vehicle_data.put("make", VehMake.getSelectedItem().toString());
-        vehicle_data.put("model", VehModel.getSelectedItem().toString());
-        // Actually send the data
-        SimpleVehicleMessage newMessage = new SimpleVehicleMessage(new Long(0), "caravan_msg", "veh_setup", vehicle_data);
-        Log.v(TAG, newMessage.toString());
-        mVehicleManager.send(newMessage);
+        // Validate input
+        int cur_year = Calendar.getInstance().get(Calendar.YEAR);
+        if (VehYear.getText().toString().length() == 0 || !(VehYear.getText().toString().trim().matches("^[0-9]*$") && Integer.parseInt(VehYear.getText().toString()) > 1980 && Integer.parseInt(VehYear.getText().toString()) < cur_year + 2)) {
+            MakeToast("Model year must be between 1980 and "+(cur_year + 2), 3);
+        }
+        else if (NumPass.getText().toString().length() == 0 ||  !(NumPass.getText().toString().trim().matches("^[0-9]*$") && Integer.parseInt(NumPass.getText().toString()) <= 20 && Integer.parseInt(NumPass.getText().toString()) > 0)) {
+            MakeToast("Number of passengers must be between 1 and 20!", 3);
+        }
+        else if (VehName.getText().toString().length() == 0) {
+            MakeToast("Please provide a vehicle name", 3);
+        }
+        else {
+            Map vehicle_data = new HashMap();
+            vehicle_data.put("pretty", VehName.getText().toString().replace(" ","%20").trim());
+            vehicle_data.put("year", VehYear.getText().toString());
+            vehicle_data.put("make", VehMake.getSelectedItem().toString());
+            vehicle_data.put("model", VehModel.getSelectedItem().toString());
+            vehicle_data.put("num_pass", NumPass.getText().toString().trim());
+            // Actually send the data
+            SimpleVehicleMessage newMessage = new SimpleVehicleMessage(new Long(0), "caravan_msg", "veh_setup", vehicle_data);
+            Log.v(TAG, newMessage.toString());
+            mVehicleManager.send(newMessage);
 
-        // Load the next activity (selecting caravan type)
-        Intent CaravanType = new Intent(this, CaravanType.class);
-        startActivity(CaravanType);
+            // Load the next activity (selecting caravan type)
+            Intent CaravanType = new Intent(this, CaravanType.class);
+            startActivity(CaravanType);
+        }
     }
 }

@@ -32,8 +32,10 @@
         <activity android:name="com.openxc.openxccaravan.CaravanType" />
         <activity android:name="com.openxc.openxccaravan.CaravanCreate" />
         <activity android:name="com.openxc.openxccaravan.AvailableCaravans" />
-        <activity android:name="com.openxc.openxccaravan.MainActivity" />
-        <activity android:name="com.openxc.openxccaravan.HostWaiting"></activity>
+        <activity android:name="com.openxc.openxccaravan.HostWaiting" />
+        <activity
+            android:name="com.openxc.openxccaravan.MainActivity"
+            android:label="@string/title_activity_main" />
     </application>
 
 </manifest>

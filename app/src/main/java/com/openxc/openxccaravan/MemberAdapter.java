@@ -36,6 +36,12 @@ public class MemberAdapter extends ArrayAdapter<Member> {
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getCount() {
+        super.getCount();
+        return member_list.size();
+    }
+
     public int getSelectedIdx() {
         return select_idx;
     }
@@ -44,20 +50,20 @@ public class MemberAdapter extends ArrayAdapter<Member> {
     public @NonNull
     View getView(int pos, View convertView, @NonNull ViewGroup parent) {
         View row = convertView;
-        MemberAdapter.ViewHolder holder = null;
+        ViewHolder holder = null;
 
         if (row == null) {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
 
-            holder = new MemberAdapter.ViewHolder();
+            holder = new ViewHolder();
             holder.pretty = (TextView)row.findViewById(R.id.PrettyName);
             holder.details = (TextView)row.findViewById(R.id.Details) ;
 
             row.setTag(holder);
         }
         else {
-            holder = (MemberAdapter.ViewHolder)row.getTag();
+            holder = (ViewHolder)row.getTag();
         }
 
         Member vehicle = member_list.get(pos);

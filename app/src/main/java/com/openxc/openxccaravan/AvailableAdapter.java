@@ -68,7 +68,7 @@ public class AvailableAdapter extends ArrayAdapter<Available>{
 
         Available caravan = available_list.get(pos);
 
-        holder.pretty.setText(caravan.pretty_name);
+        holder.pretty.setText(caravan.pretty_name.replace("%20", " "));
         holder.details.setText("Locked?: "+caravan.locked+" | "+caravan.count+"/"+caravan.max);
 
         return row;

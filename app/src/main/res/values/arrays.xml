@@ -5,18 +5,27 @@
         <item>Lincoln</item>
     </string-array>
     <string-array name="models_ford">
-        <item>Focus</item>
-        <item>Fusion</item>
+        <item>C-Max</item>
         <item>Edge</item>
         <item>Escape</item>
+        <item>Expedition</item>
+        <item>Explorer</item>
         <item>F-150</item>
+        <item>F-250</item>
+        <item>Fiesta</item>
+        <item>Flex</item>
+        <item>Focus</item>
+        <item>Fusion</item>
+        <item>Mustang</item>
         <item>Taurus</item>
+        <item>Transit</item>
     </string-array>
     <string-array name="models_lincoln">
+        <item>Continental</item>
         <item>MKC</item>
+        <item>MKT</item>
         <item>MKX</item>
         <item>MKZ</item>
-        <item>Continental</item>
         <item>Navigator</item>
     </string-array>
 </resources>

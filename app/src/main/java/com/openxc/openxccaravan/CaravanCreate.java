@@ -100,24 +100,35 @@ public class CaravanCreate extends Activity {
         final EditText password_repeat = (EditText) findViewById(R.id.password_repeat);
         final EditText max = (EditText) findViewById(R.id.max_members);
 
-        if (password.getText().toString().equals(password_repeat.getText().toString()) & max.getText().toString().trim().matches("^[0-9]*$")) {
+
+        if (name.getText().toString().length() == 0) {
+            MakeToast("Please provide a caravan name", 3);
+        }
+
+        else if (max.getText().toString().length() == 0 || !(max.getText().toString().trim().matches("^[0-9]*$") && Integer.parseInt(max.getText().toString()) <= 16 && Integer.parseInt(max.getText().toString()) > 1)) {
+            MakeToast("Caravan max size must be between 1 and 16",3);
+        }
+
+        else if (passwordSwitch.isChecked() && password.getText().toString().equals(password_repeat.getText().toString())) {
+            MakeToast("Password and retype password do not match!",3);
+        }
+
+        else {
             Map caravan_data = new HashMap();
-            caravan_data.put("pretty", name.getText().toString().trim());
+            caravan_data.put("pretty", name.getText().toString().replace(" ","%20").trim());
+            if (passwordSwitch.isChecked() && password.getText().toString().length() == 0) { caravan_data.put("protected", false); }
+            else { caravan_data.put("protected", passwordSwitch.isChecked()); }
             caravan_data.put("protected", passwordSwitch.isChecked());
-            caravan_data.put("pw",password.getText().toString());
+            caravan_data.put("pw",password.getText().toString().replace(" ","%20").trim());
             caravan_data.put("max", max.getText().toString().trim());
 
-            // Send the data,
-            SimpleVehicleMessage newMessage = new SimpleVehicleMessage(Long.valueOf(0), "caravan_msg", "start_caravan", caravan_data);
+            // Send the data
+            SimpleVehicleMessage newMessage = new SimpleVehicleMessage(Long.valueOf(0), "caravan_msg", "setup_caravan", caravan_data);
             Log.v(TAG, newMessage.toString());
             mVehicleManager.send(newMessage);
             // Change the view
             Intent HostWaiting = new Intent(this, HostWaiting.class);
             startActivity(HostWaiting);
-
-        } else {
-            if (password.getText().toString().equals(password_repeat.getText().toString())) { MakeToast("Max must be a number! (1-99 inclusive)",3); }
-            else { MakeToast("Password and retype password do not match!",3); }
         }
     }
 }

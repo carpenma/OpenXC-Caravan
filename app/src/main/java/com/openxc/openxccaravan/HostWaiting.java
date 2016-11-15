@@ -85,7 +85,7 @@ public class HostWaiting extends ListActivity {
                             Map extras = message.getExtras();
                             try {
                                 JSONObject details = new JSONObject(extras);
-                                member_list.add(new Member(details.getString("pretty"),details.getString("make"), details.getString("model"),details.getInt("year")));
+                                member_list.add(new Member(details.getString("pretty").replace("%20"," "),details.getString("make"), details.getString("model"),details.getInt("year")));
                                 adapter.notifyDataSetChanged();
                                 Log.i(TAG,"Member List: "+member_list);
                             } catch (JSONException e) {
@@ -111,4 +111,16 @@ public class HostWaiting extends ListActivity {
             mVehicleManager = null;
         }
     };
+
+    public void CaravanStart(View view) {
+        // Tell V2X to signal to other vehicles that the caravan has started!
+        Map extras = new HashMap();
+        SimpleVehicleMessage newMessage = new SimpleVehicleMessage(Long.valueOf(0), "caravan_msg", "start_caravan", extras);
+        Log.v(TAG, newMessage.toString());
+        mVehicleManager.send(newMessage);
+
+        // Open the main activity
+        Intent MainActivity = new Intent(this, MainActivity.class);
+        startActivity(MainActivity);
+    }
 }

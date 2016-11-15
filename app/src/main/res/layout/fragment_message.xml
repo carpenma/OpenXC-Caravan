@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.openxc.openxccaravan.MessageFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top">
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/sendingElements"
+            android:layout_height="0dp" />
+
+        <LinearLayout
+            android:id="@+id/sendingElements"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:text="Name"
+                android:ems="10"
+                android:id="@+id/msgBody"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="Send"
+                android:layout_width="74dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/send_button"
+                android:onClick="send_butonClick" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

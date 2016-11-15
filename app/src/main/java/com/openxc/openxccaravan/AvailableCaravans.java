@@ -42,8 +42,6 @@ public class AvailableCaravans extends ListActivity {
         final EditText password = (EditText) findViewById(R.id.password);
         adapter = new AvailableAdapter(AvailableCaravans.this, R.layout.available_caravan_row, available_list);
 
-        available.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
         available.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -152,7 +150,7 @@ public class AvailableCaravans extends ListActivity {
 
         Map join_data = new HashMap();
         join_data.put("pretty", available_list.get(adapter.getSelectedIdx()).pretty_name);
-        join_data.put("pw", password.getText().toString());
+        join_data.put("pw", password.getText().toString().replace(" ","%20").trim());
 
         // Send caravan request
         SimpleVehicleMessage newMessage = new SimpleVehicleMessage(Long.valueOf(0), "caravan_msg", "join_caravan", join_data);

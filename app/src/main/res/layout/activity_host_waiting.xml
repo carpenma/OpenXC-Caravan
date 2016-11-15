@@ -17,7 +17,8 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/continue_button"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="CaravanStart" />
 
     <Button
         android:text="Kick"
@@ -43,10 +44,12 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:listSelector="@android:color/darker_gray"
         android:layout_below="@+id/intro_text"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/continue_button"
-        android:id="@+id/@android:id/list" />
+        android:id="@android:id/list" />
 
 </RelativeLayout>
